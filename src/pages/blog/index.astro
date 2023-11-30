@@ -6,6 +6,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 
+import { client } from '../../lib/drupalApiClient';
+const articles = await client.getCollection('node--article');
+
 const posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
 );
@@ -88,6 +91,9 @@ const posts = (await getCollection('blog')).sort(
 	<body>
 		<Header />
 		<main>
+      <h3>Articles sourced from Drupal:</h3>
+      <!-- TODO - improve type here -->
+      {articles.data.map((article: any) => <p>{article.attributes.title}</p>)}
 			<section>
 				<ul>
 					{
