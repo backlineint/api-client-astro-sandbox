@@ -1,0 +1,36 @@
+---
+import Article from "../layouts/Article.astro";
+import { client } from "../lib/drupalApiClient";
+
+export async function getStaticPaths() {
+  const articles = await client.getCollection("node--article", {
+    queryString: "include=field_media_image.field_media_image",
+  });
+
+  // Deserializing would be much more efficient here...
+  const included = articles.included;
+
+  return articles.data.map((article) => ({
+    params: { slug: article.attributes.path.alias },
+    props: { article, included },
+  }));
+}
+
+// type Props = CollectionEntry<"blog">;
+
+const { article, included } = Astro.props;
+
+const mediaId = article.relationships.field_media_image.data.id;
+const mediaEntity = included.find((obj) => obj.id === mediaId);
+const fileId = mediaEntity.relationships.field_media_image.data.id;
+const fileEntity = included.find((obj) => obj.id === fileId);
+const fileUrl = fileEntity.attributes.uri.url;
+---
+
+<Article
+  title={article.attributes.title}
+  pubDate={new Date(article.attributes.created)}
+  heroImage={fileUrl}
+>
+  <div set:html={article.attributes.body.processed} />
+</Article>
