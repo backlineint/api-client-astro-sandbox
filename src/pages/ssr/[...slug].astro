@@ -1,0 +1,34 @@
+---
+import Article from "../../layouts/Article.astro";
+import { client } from "../../lib/drupalApiClient";
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+const drupalSlug = slug.replace("/ssr", "");
+
+// Since we can't use getStaticPaths when opting out of pre-rendering, we need to use Decoupled Router to translate the path first.
+const router = await fetch(
+  `${import.meta.env.DRUPAL_BASE_URL}/router/translate-path?path=${drupalSlug}`
+).then((response) => response.json());
+
+const { type, bundle, uuid } = router.entity;
+
+const article = await client.getResource(`${type}--${bundle}`, uuid, {
+  queryString: "include=field_media_image.field_media_image",
+});
+
+const mediaId = article.data.relationships.field_media_image.data.id;
+const mediaEntity = article.included.find((obj) => obj.id === mediaId);
+const fileId = mediaEntity.relationships.field_media_image.data.id;
+const fileEntity = article.included.find((obj) => obj.id === fileId);
+const fileUrl = fileEntity.attributes.uri.url;
+---
+
+<Article
+  title={article.data.attributes.title}
+  pubDate={new Date(article.data.attributes.created)}
+  heroImage={fileUrl}
+>
+  <div set:html={article.data.attributes.body.processed} />
+</Article>
