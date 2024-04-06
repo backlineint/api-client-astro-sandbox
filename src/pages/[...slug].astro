@@ -16,14 +16,15 @@ export async function getStaticPaths() {
   }));
 }
 
-// type Props = CollectionEntry<"blog">;
-
 const { article, included } = Astro.props;
 
-const mediaId = article.relationships.field_media_image.data.id;
-const mediaEntity = included.find((obj) => obj.id === mediaId);
-const fileId = mediaEntity.relationships.field_media_image.data.id;
-const fileEntity = included.find((obj) => obj.id === fileId);
+const getRelationship = (entity, includes, relationship) => {
+  const id = entity.relationships[relationship].data.id;
+  return included.find((obj) => obj.id === id);
+};
+
+const mediaEntity = getRelationship(article, included, "field_media_image");
+const fileEntity = getRelationship(mediaEntity, included, "field_media_image");
 const fileUrl = fileEntity.attributes.uri.url;
 ---
 

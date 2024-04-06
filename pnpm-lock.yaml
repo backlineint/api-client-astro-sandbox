@@ -21,11 +21,17 @@ dependencies:
     specifier: ^3.0.3
     version: 3.0.3
   '@drupal-api-client/json-api-client':
-    specifier: ^0.2.0
-    version: 0.2.0
+    specifier: ^1.0.0
+    version: 1.0.0
   astro:
     specifier: ^4.0.7
     version: 4.0.7(typescript@5.3.2)
+  nanostores:
+    specifier: ^0.10.2
+    version: 0.10.2
+  node-cache:
+    specifier: ^5.1.2
+    version: 5.1.2
   typescript:
     specifier: ^5.3.2
     version: 5.3.2
@@ -203,23 +209,23 @@ packages:
     engines: {node: '>=16.0.0'}
     dependencies:
       '@aws-crypto/util': 5.2.0
-      '@aws-sdk/types': 3.460.0
+      '@aws-sdk/types': 3.535.0
       tslib: 2.6.2
     dev: false
 
   /@aws-crypto/util@5.2.0:
     resolution: {integrity: sha512-4RkU9EsI6ZpBve5fseQlGNUWKMa1RLPQ1dnjnQoe07ldfIzcsGb5hC5W0Dm7u423KWzawlrpbjXBrXCEv9zazQ==}
     dependencies:
-      '@aws-sdk/types': 3.460.0
-      '@smithy/util-utf8': 2.0.2
+      '@aws-sdk/types': 3.535.0
+      '@smithy/util-utf8': 2.3.0
       tslib: 2.6.2
     dev: false
 
-  /@aws-sdk/types@3.460.0:
-    resolution: {integrity: sha512-MyZSWS/FV8Bnux5eD9en7KLgVxevlVrGNEP3X2D7fpnUlLhl0a7k8+OpSI2ozEQB8hIU2DLc/XXTKRerHSefxQ==}
+  /@aws-sdk/types@3.535.0:
+    resolution: {integrity: sha512-aY4MYfduNj+sRR37U7XxYR8wemfbKP6lx00ze2M2uubn7mZotuVrWYAafbMSXrdEMSToE5JDhr28vArSOoLcSg==}
     engines: {node: '>=14.0.0'}
     dependencies:
-      '@smithy/types': 2.6.0
+      '@smithy/types': 2.12.0
       tslib: 2.6.2
     dev: false
 
@@ -450,18 +456,25 @@ packages:
       to-fast-properties: 2.0.0
     dev: false
 
-  /@drupal-api-client/api-client@0.2.0:
-    resolution: {integrity: sha512-a4ZDPNEuq9jssrkQa4f9pjyJiyDd3T97XBDHUsZeqzw7RDW85LQVU+KDUzz6Qaw/Wz77Dxs1vAegFMdoFg7BFA==}
+  /@drupal-api-client/api-client@1.0.0:
+    resolution: {integrity: sha512-hZa6C/0Gup/JsWoMa5BIefq1dAfVVf9rzZXBvqVZnzl5pIIoL2oCKfLha3F/Co39DDWmZLpqTL+oqTloM/031g==}
     dependencies:
       uint8array-extras: 0.5.1
     dev: false
 
-  /@drupal-api-client/json-api-client@0.2.0:
-    resolution: {integrity: sha512-r4tVChhLiHEPs1DON5yq09ZzxLBUlj0A9Hs9v35MnvgG72FYdfyGbkidj9aCb+BNCVfYYhN1e+Etk9WCnqt90A==}
+  /@drupal-api-client/decoupled-router-client@1.0.0:
+    resolution: {integrity: sha512-19zFBvHSESZ/mAGEM1IuzHWOXhshd+j8S/qLoWRz3UCMAk/wZj9GsKIBk28MUFAh29coTnvXq83abx89n63TZA==}
+    dependencies:
+      '@drupal-api-client/api-client': 1.0.0
+    dev: false
+
+  /@drupal-api-client/json-api-client@1.0.0:
+    resolution: {integrity: sha512-v9qBwDfdM0DzsQoFOa5M46UVqGJhCuYn9pIYXSzLVFh8dtNY66qRDuITuaL0i4NtjFXoMGH3bU4TVbVapnSZvw==}
     dependencies:
       '@aws-crypto/sha256-js': 5.2.0
-      '@drupal-api-client/api-client': 0.2.0
-      '@smithy/util-hex-encoding': 2.0.0
+      '@drupal-api-client/api-client': 1.0.0
+      '@drupal-api-client/decoupled-router-client': 1.0.0
+      '@smithy/util-hex-encoding': 2.2.0
     dev: false
 
   /@emmetio/abbreviation@2.3.3:
@@ -863,40 +876,40 @@ packages:
     dev: false
     optional: true
 
-  /@smithy/is-array-buffer@2.0.0:
-    resolution: {integrity: sha512-z3PjFjMyZNI98JFRJi/U0nGoLWMSJlDjAW4QUX2WNZLas5C0CmVV6LJ01JI0k90l7FvpmixjWxPFmENSClQ7ug==}
+  /@smithy/is-array-buffer@2.2.0:
+    resolution: {integrity: sha512-GGP3O9QFD24uGeAXYUjwSTXARoqpZykHadOmA8G5vfJPK0/DC67qa//0qvqrJzL1xc8WQWX7/yc7fwudjPHPhA==}
     engines: {node: '>=14.0.0'}
     dependencies:
       tslib: 2.6.2
     dev: false
 
-  /@smithy/types@2.6.0:
-    resolution: {integrity: sha512-PgqxJq2IcdMF9iAasxcqZqqoOXBHufEfmbEUdN1pmJrJltT42b0Sc8UiYSWWzKkciIp9/mZDpzYi4qYG1qqg6g==}
+  /@smithy/types@2.12.0:
+    resolution: {integrity: sha512-QwYgloJ0sVNBeBuBs65cIkTbfzV/Q6ZNPCJ99EICFEdJYG50nGIY/uYXp+TbsdJReIuPr0a0kXmCvren3MbRRw==}
     engines: {node: '>=14.0.0'}
     dependencies:
       tslib: 2.6.2
     dev: false
 
-  /@smithy/util-buffer-from@2.0.0:
-    resolution: {integrity: sha512-/YNnLoHsR+4W4Vf2wL5lGv0ksg8Bmk3GEGxn2vEQt52AQaPSCuaO5PM5VM7lP1K9qHRKHwrPGktqVoAHKWHxzw==}
+  /@smithy/util-buffer-from@2.2.0:
+    resolution: {integrity: sha512-IJdWBbTcMQ6DA0gdNhh/BwrLkDR+ADW5Kr1aZmd4k3DIF6ezMV4R2NIAmT08wQJ3yUK82thHWmC/TnK/wpMMIA==}
     engines: {node: '>=14.0.0'}
     dependencies:
-      '@smithy/is-array-buffer': 2.0.0
+      '@smithy/is-array-buffer': 2.2.0
       tslib: 2.6.2
     dev: false
 
-  /@smithy/util-hex-encoding@2.0.0:
-    resolution: {integrity: sha512-c5xY+NUnFqG6d7HFh1IFfrm3mGl29lC+vF+geHv4ToiuJCBmIfzx6IeHLg+OgRdPFKDXIw6pvi+p3CsscaMcMA==}
+  /@smithy/util-hex-encoding@2.2.0:
+    resolution: {integrity: sha512-7iKXR+/4TpLK194pVjKiasIyqMtTYJsgKgM242Y9uzt5dhHnUDvMNb+3xIhRJ9QhvqGii/5cRUt4fJn3dtXNHQ==}
     engines: {node: '>=14.0.0'}
     dependencies:
       tslib: 2.6.2
     dev: false
 
-  /@smithy/util-utf8@2.0.2:
-    resolution: {integrity: sha512-qOiVORSPm6Ce4/Yu6hbSgNHABLP2VMv8QOC3tTDNHHlWY19pPyc++fBTbZPtx6egPXi4HQxKDnMxVxpbtX2GoA==}
+  /@smithy/util-utf8@2.3.0:
+    resolution: {integrity: sha512-R8Rdn8Hy72KKcebgLiv8jQcQkXoLMOGGv5uI1/k0l+snqkOzQ1R0ChUBCxWMlBsFMekWjq0wRudIweFs7sKT5A==}
     engines: {node: '>=14.0.0'}
     dependencies:
-      '@smithy/util-buffer-from': 2.0.0
+      '@smithy/util-buffer-from': 2.2.0
       tslib: 2.6.2
     dev: false
 
@@ -1416,6 +1429,11 @@ packages:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
+    dev: false
+
+  /clone@2.1.2:
+    resolution: {integrity: sha512-3Pe/CF1Nn94hyhIYpjtiLhdCoEoz0DqQ+988E9gmeEdQZlojxnOb74wctFyuwWQHzqyf9X7C7MG8juUpqBJT8w==}
+    engines: {node: '>=0.8'}
     dev: false
 
   /clsx@2.0.0:
@@ -3005,6 +3023,11 @@ packages:
     hasBin: true
     dev: false
 
+  /nanostores@0.10.2:
+    resolution: {integrity: sha512-Z/nqsDGQvjYTXZcVge06IS8OAJ8Lzb1jLUSAbDDomDBtlSXh88M4toUKW3iKwN+BfblEXhft0KlwJ+bgGi/Ysw==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    dev: false
+
   /napi-build-utils@1.0.2:
     resolution: {integrity: sha512-ONmRUqK7zj7DWX0D9ADe03wbwOBZxNAfF20PlGfCWQcD3+/MakShIHrMqx9YwPTfxDdF1zLeL+RGZiR9kGMLdg==}
     requiresBuild: true
@@ -3043,6 +3066,13 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /node-cache@5.1.2:
+    resolution: {integrity: sha512-t1QzWwnk4sjLWaQAS8CHgOJ+RAfmHpxFWmc36IWTiWHQfs0w5JDMBS1b1ZxQteo0vVVuWJvIUKHDkkeK7vIGCg==}
+    engines: {node: '>= 8.0.0'}
+    dependencies:
+      clone: 2.1.2
+    dev: false
 
   /node-releases@2.0.13:
     resolution: {integrity: sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==}
